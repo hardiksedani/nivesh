@@ -337,3 +337,16 @@ input[type=range] { accent-color:var(--primary); cursor:pointer; }
  .investment-card .learn-more { height:25px; font-size:10px; }
  .planning-copy h2 { font-size:23px; }
 }
+@media (min-width:1060px) and (max-width:1200px) {
+ .features { min-height:94px; padding:17px 21px; }
+ .feature { gap:23px; }
+ .feature:not(:last-child) { padding-right:12px; }
+ .feature p { font-size:11px; line-height:1.4; }
+ .feature h3 { font-size:13px; margin-bottom:5px; }
+ .discovery { grid-template-columns:1.42fr repeat(4,1fr); }
+ .discovery-intro { padding-right:8px; }
+ .discovery-intro p { font-size:11px; line-height:1.4; }
+ .discovery-intro .text-link { font-size:11px; }
+ .discovery h2 { font-size:24px; }
+ .investment-card p { line-height:1.35; }
+}
