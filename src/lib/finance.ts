@@ -12,4 +12,13 @@ export function monthsToGoal(monthly: number, annualRate: number, goal = GOAL, i
 }
 export const availableContribution = (income: number, expenses: number) => Math.max(0, income - expenses);
 export const afterDecline = (value: number, percent: number) => value * (1 - percent / 100);
-export const duration = (months: number | null) => months === null ? 'Not reached within 100 years' : `${Math.floor(months / 12)} ${Math.floor(months / 12) === 1 ? "year" : "years"}${months % 12 ? `, ${months % 12} ${months % 12 === 1 ? "month" : "months"}` : ''}`;
+export const duration = (months: number | null) => months === null ? 'Not reached within 100 years' : `${Math.floor(months / 12)} ${Math.floor(months / 12) === 1 ? "year" : "years"}${months % 12 ? `, ${months % 12} ${months % 12 === 1 ? "month" : "months"}` : ''}`;/** Monthly contributions that rise by stepUpPct once every 12 months; returns value after `months`. */
+export function stepUpValue(monthly: number, stepUpPct: number, annualRate: number, months: number) {
+  const r = Math.pow(1 + annualRate, 1 / 12) - 1;
+  let value = 0, contributed = 0, pay = monthly;
+  for (let m = 1; m <= months; m++) { value = value * (1 + r) + pay; contributed += pay; if (m % 12 === 0) pay *= 1 + stepUpPct / 100; }
+  return { value, contributed };
+}
+export function ageTimeline(age: number, monthly: number, stepUpPct: number, annualRate: number, ages = [22, 25, 30, 35, 40, 50, 60]) {
+  return ages.filter(a => a > age).map(a => ({ age: a, ...stepUpValue(monthly, stepUpPct, annualRate, (a - age) * 12) }));
+}
