@@ -43,15 +43,6 @@ Inspect the running page at desktop and mobile sizes, identify the largest visua
 Do not stop after describing the changes. Implement and verify them.
 i want website fronted to exactly look like the image i had shared with you + i want very good, attractive and professional ui/ux
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/eabde243-617a-4c50-9c19-4ea295b74fef).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
