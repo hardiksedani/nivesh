@@ -1,24 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Link } from '@tanstack/react-router';
+import { lazy, Suspense, useState } from 'react';
+import { ArrowRight, BookOpen, CalendarDays, Check, Compass, Crown, Pencil, Play, ShieldCheck, Sprout, Target, ChartNoAxesColumnIncreasing } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { InvestmentCard } from '@/components/investment-card';
+import { PlanPreview } from '@/components/plan-preview';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { investments } from '@/lib/learning';
+import { pageHead } from '@/lib/page-head';
+import journeyImage from '@/assets/journey.jpg';
+const JourneyScene=lazy(()=>import('@/components/journey-scene').then(m=>({default:m.JourneyScene})));
 export const Route = createFileRoute("/")({
+  ssr:false,
+  head:()=>pageHead('Your first ₹10 lakh starts with clarity','Learn the basics, explore investment choices and build a thoughtful plan toward ₹10 lakh. Your money. Your future. Your plan.'),
   component: Index,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const milestones=[{icon:BookOpen,title:'Learn',sub:'The Basics',description:'Start with saving, investing, compounding and risk. Simple explanations, one idea at a time.',to:'/learn'},{icon:ChartNoAxesColumnIncreasing,title:'Explore',sub:'Options',description:'Understand fixed deposits, index funds, gold and stocks before comparing your choices.',to:'/explore'},{icon:Target,title:'Build',sub:'Your Plan',description:'Choose a comfortable contribution and explore an illustrative timeline toward your goal.',to:'/planner'},{icon:CalendarDays,title:'Stay',sub:'Consistent',description:'Review your plan regularly, prepare for market declines and keep your long-term needs in mind.',to:'/planner'}];
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+ const [active,setActive]=useState<number|null>(null);
+ return <main><section className="hero"><div className="hero-copy"><span className="eyebrow hero-eyebrow"><Sprout size={14} className="text-primary"/>For every first-time investor</span><h1>Your first <em>₹10 lakh</em><br/>starts with clarity.</h1><p className="hero-description">New to investing? Learn the basics, explore your choices and build a plan that makes sense for you.</p><div className="hero-ctas"><Button variant="premium" asChild><Link to="/planner">Build my plan <ArrowRight/></Link></Button><Button variant="outline" asChild><Link to="/journey"><span className="play-circle"><Play size={12} fill="currentColor"/></span>See how it works</Link></Button></div><div className="reassurance">{['No trading.','No jargon.','Just understanding.'].map(text=><span key={text}><Check className="check-circle"/>{text}</span>)}</div></div><div className="journey"><img className="journey-image" src={journeyImage} alt="A student with a backpack following rising cream stepping stones through a lush green landscape toward a flag" fetchPriority="high"/><Suspense fallback={null}><JourneyScene/></Suspense><div className="journey-overlays"><div className="goal-card"><div className="goal-card-label">Your goal<Link to="/planner" aria-label="Edit your financial goal"><Pencil size={14}/></Link></div><strong>₹10,00,000</strong><div className="goal-track"/><small>You're at the start. Let's build this together.</small></div>{milestones.map((m,i)=><Button key={m.title} variant="outline" className={`milestone milestone-${i}`} aria-label={`${m.title} ${m.sub}`} onClick={()=>setActive(i)}><m.icon/><span>{m.title}<br/>{m.sub}</span></Button>)}<div className="start-marker"><small>Start small<br/>Invest ₹500</small><strong>₹500</strong></div><div className="destination"><span className="inline-flex items-center gap-1"><Crown size={13} className="text-gold"/>₹10 lakh</span></div><div className="growth-card"><strong>A possible growth path</strong><p>(illustrative)</p><div className="growth-bars">{Array.from({length:10},(_,i)=><i key={i}/>)}</div><div className="growth-years"><span>Now</span><span>1Y</span><span>3Y</span><span>5Y</span><span>10Y</span></div><p>This is an example, not a guarantee<br/>of returns.</p></div></div></div></section><div className="page-width"><section className="features" aria-label="Your learning journey">{[{icon:BookOpen,title:'Learn at your pace',text:'Simple explanations, real-life examples and bite-sized lessons for beginners.'},{icon:Compass,title:'Choose with confidence',text:'Compare different investment options and pick based on your goals, risk and timeline.'},{icon:ShieldCheck,title:'Prepare for ups and downs',text:'Understand risks, market cycles and how to stay on track for the long term.'}].map(f=><div className="feature" key={f.title}><div className="feature-icon"><f.icon/></div><div><h3>{f.title}</h3><p>{f.text}</p></div></div>)}</section><section className="discovery"><div className="discovery-intro"><span className="eyebrow">EXPLORE OPTIONS</span><h2>Popular ways<br/>to start investing</h2><p>Understand how each option works, who it's for, its risks and potential. Compare and choose what fits your goals.</p><Link className="text-link" to="/explore">Explore all options <ArrowRight size={14}/></Link></div>{investments.slice(0,4).map(item=><InvestmentCard key={item.id} item={item}/>)}</section></div><section className="planning-band"><div className="page-width planning-inner"><div className="planning-copy"><span className="eyebrow">YOUR PERSONAL PLAN</span><h2>Let’s build your ₹10 lakh plan</h2><p>Tell us a bit about yourself and we’ll create a simple, customized roadmap to help you reach your goal.</p><Link to="/planner" className="text-link">Make room for your future <ArrowRight size={15}/></Link></div><PlanPreview/></div></section><Dialog open={active!==null} onOpenChange={open=>{if(!open)setActive(null)}}><DialogContent>{active!==null&&<><DialogTitle>{milestones[active].title} {milestones[active].sub}</DialogTitle><DialogDescription>{milestones[active].description}</DialogDescription><Button variant="premium" asChild><Link to={milestones[active].to} onClick={()=>setActive(null)}>Take this step <ArrowRight/></Link></Button></>}</DialogContent></Dialog></main>;
 }
