@@ -124,6 +124,7 @@ function RootComponent() {
       <SiteHeader />
       <Outlet />
       <SiteFooter />
+      <Assistant />
     </QueryClientProvider>
   );
 }
