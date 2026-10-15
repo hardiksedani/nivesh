@@ -1,0 +1,16 @@
+import { Link } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ArrowRight, ChevronDown, Menu, Search, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+
+export function Brand() {
+  return <Link to="/" className="brand" aria-label="NIVESH home"><svg viewBox="0 0 32 36" aria-hidden="true"><path d="M17 31C7 31 3 25 3 15c10 0 15 5 14 16Z" fill="currentColor"/><path d="M18 30C10 15 16 4 25 1c5 12 2 22-7 29Z" fill="var(--emerald)"/><path d="m18 29 4-17" stroke="var(--background)" strokeWidth="1" opacity=".65"/></svg>nivesh.</Link>;
+}
+export function SiteHeader() {
+  const [open,setOpen] = useState(false);
+  const [signIn,setSignIn] = useState(false);
+  const [search,setSearch] = useState('');
+  return <><header className="site-header"><div className="header-inner"><Brand/><nav className="desktop-nav" aria-label="Main navigation"><Link to="/journey">How it works</Link><Link to="/explore">Explore options <ChevronDown size={13}/></Link><Link to="/planner">Your plan</Link><Link to="/learn">Learn <ChevronDown size={13}/></Link></nav><div className="header-actions"><form className="search-box" action="/explore"><Search/><input name="q" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search anything..." aria-label="Search investment options"/></form><Button variant="outline" className="sign-in" onClick={()=>setSignIn(true)}>Sign in</Button><Button asChild variant="premium" className="nav-cta"><Link to="/planner">Start my journey <ArrowRight/></Link></Button><Button variant="ghost" size="icon" className="mobile-menu-button" onClick={()=>setOpen(!open)} aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open}>{open?<X/>:<Menu/>}</Button></div></div>{open&&<nav className="mobile-nav" aria-label="Mobile navigation">{([['/journey','How it works'],['/explore','Explore options'],['/planner','Your plan'],['/learn','Learn']] as const).map(([to,label])=><Link key={to} to={to} onClick={()=>setOpen(false)}>{label}</Link>)}<Button variant="premium" asChild><Link to="/planner" onClick={()=>setOpen(false)}>Start my journey <ArrowRight/></Link></Button><Button variant="outline" onClick={()=>{setOpen(false);setSignIn(true)}}>Sign in</Button></nav>}</header><Dialog open={signIn} onOpenChange={setSignIn}><DialogContent><DialogTitle>Welcome to your demo journey</DialogTitle><DialogDescription>Explore as Aarav, a 19-year-old student starting with ₹8,000 a month. This is an educational simulation, not a real investment account. Your plan stays in this session only.</DialogDescription><Button asChild variant="premium"><Link to="/planner" onClick={()=>setSignIn(false)}>Continue with demo profile <ArrowRight/></Link></Button></DialogContent></Dialog></>;
+}
+export function SiteFooter() { return <footer className="page-footer"><Brand/><p>Education, not financial advice. All plans and returns are illustrative. Investments can lose value; fees and taxes apply. Your ₹10 lakh goal is a destination, not a promise.</p><div className="footer-links"><Link to="/learn">Learn</Link><Link to="/compare">Compare</Link><Link to="/planner">Your plan</Link></div></footer>; }
