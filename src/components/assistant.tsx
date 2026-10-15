@@ -64,7 +64,7 @@ const FALLBACK: { text: string; link?: { to: string; label: string } } = {
 
 function answerFor(input: string): { text: string; link?: { to: string; label: string } } {
   const q = input.toLowerCase();
-  return ANSWERS.find((a) => a.keys.some((k) => q.includes(k))) ?? { text: FALLBACK };
+  return ANSWERS.find((a) => a.keys.some((k) => q.includes(k))) ?? FALLBACK;
 }
 
 export function Assistant() {
