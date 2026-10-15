@@ -12,4 +12,4 @@ export function monthsToGoal(monthly: number, annualRate: number, goal = GOAL, i
 }
 export const availableContribution = (income: number, expenses: number) => Math.max(0, income - expenses);
 export const afterDecline = (value: number, percent: number) => value * (1 - percent / 100);
-export const duration = (months: number | null) => months === null ? 'Not reached within 100 years' : `${Math.floor(months / 12)} years${months % 12 ? `, ${months % 12} months` : ''}`;
+export const duration = (months: number | null) => months === null ? 'Not reached within 100 years' : `${Math.floor(months / 12)} ${Math.floor(months / 12) === 1 ? "year" : "years"}${months % 12 ? `, ${months % 12} ${months % 12 === 1 ? "month" : "months"}` : ''}`;

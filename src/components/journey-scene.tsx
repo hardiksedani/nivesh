@@ -36,7 +36,7 @@ export function JourneyScene() {
     setAnimate(supported&&!media.matches);
     const change=()=>setAnimate(supported&&!media.matches);
     media.addEventListener('change',change);
-    const observer=new IntersectionObserver(([entry])=>setVisible(entry.isIntersecting));
+    const observer=new IntersectionObserver(([entry])=>setVisible(entry?.isIntersecting ?? false));
     if(host.current) observer.observe(host.current);
     return ()=>{observer.disconnect();media.removeEventListener('change',change)};
   },[]);
