@@ -287,3 +287,53 @@ input[type=range] { accent-color:var(--primary); cursor:pointer; }
 
 .goal-card small { display:block; font-size:9px; line-height:1.4; }
 @media(max-width:760px) { .goal-card small { font-size:8px; } .growth-card { width:125px; bottom:5px; } .growth-card p { line-height:1.4; } }
+@media (min-width:1060px) and (max-width:1200px) {
+ .site-header { height:52px; }
+ .header-inner { padding:0 5.3%; }
+ .brand { font-size:27px; }
+ .brand svg { width:23px; height:27px; }
+ .desktop-nav { gap:27px; font-size:11px; margin-left:48px; }
+ .header-actions { gap:10px; }
+ .header-actions .nav-cta,.header-actions .sign-in { height:33px; font-size:11px; }
+ .search-box input { height:33px; }
+ .search-box svg { top:9px; }
+ .hero { height:338px; }
+ .hero-copy { padding-top:22px; }
+ .hero h1 { font-size:52px; margin-top:12px; }
+ .hero-description { font-size:16px; margin-top:11px; max-width:430px; line-height:1.4; }
+ .hero-ctas { margin-top:19px; gap:13px; }
+ .hero-ctas a { height:42px; padding:0 24px; font-size:13px; }
+ .reassurance { margin-top:19px; gap:17px; font-size:11px; }
+ .check-circle { width:19px; height:19px; }
+ .goal-card { top:32px; width:194px; left:24%; padding:13px 14px; }
+ .goal-card strong { font-size:23px; margin:4px 0 8px; }
+ .goal-card-label { font-size:12px; }
+ .goal-card small { font-size:8px; }
+ .growth-card { width:171px; padding:12px 14px; bottom:16px; font-size:9px; }
+ .growth-card p { font-size:8px; }
+ .growth-bars { height:45px; gap:5px; }
+ .growth-years { font-size:8px; margin-bottom:9px; }
+ .milestone { width:78px; min-height:35px; padding:6px 8px; gap:7px; }
+ .milestone span { font-size:8px; }
+ .milestone svg { width:17px; height:17px; }
+ .milestone:after { height:20px; }
+ .start-marker { bottom:14px; }
+ .start-marker small { padding:7px 9px; font-size:9px; margin-bottom:9px; }
+ .start-marker strong { font-size:17px; padding:5px 19px; }
+ .destination { font-size:11px; padding:5px 9px; }
+ .features { padding:18px 22px; gap:22px; }
+ .feature { grid-template-columns:58px 1fr; gap:25px; }
+ .feature-icon { width:58px; height:58px; }
+ .feature-icon svg { width:29px; height:29px; }
+ .feature h3 { font-size:14px; }
+ .feature p { font-size:11px; }
+ .discovery { padding-top:20px; padding-bottom:14px; }
+ .discovery h2 { font-size:25px; margin:9px 0 7px; }
+ .discovery-intro p { font-size:12px; }
+ .investment-card { padding:12px 14px; }
+ .investment-icon { width:43px; height:43px; }
+ .investment-card p { font-size:11px; margin:12px 0 10px; }
+ .investment-card h3 { font-size:11px; }
+ .investment-card .learn-more { height:25px; font-size:10px; }
+ .planning-copy h2 { font-size:23px; }
+}
