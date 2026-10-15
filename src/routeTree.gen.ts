@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as InvestRouteImport } from './routes/invest'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as PlannerRouteImport } from './routes/planner'
@@ -29,6 +30,11 @@ const CompareRoute = CompareRouteImport.update({
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestRoute = InvestRouteImport.update({
+  id: '/invest',
+  path: '/invest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JourneyRoute = JourneyRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/explore': typeof ExploreRoute
+  '/invest': typeof InvestRoute
   '/journey': typeof JourneyRoute
   '/learn': typeof LearnRoute
   '/planner': typeof PlannerRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/explore': typeof ExploreRoute
+  '/invest': typeof InvestRoute
   '/journey': typeof JourneyRoute
   '/learn': typeof LearnRoute
   '/planner': typeof PlannerRoute
@@ -68,20 +76,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/explore': typeof ExploreRoute
+  '/invest': typeof InvestRoute
   '/journey': typeof JourneyRoute
   '/learn': typeof LearnRoute
   '/planner': typeof PlannerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/compare' | '/explore' | '/journey' | '/learn' | '/planner'
+  fullPaths:
+    | '/'
+    | '/compare'
+    | '/explore'
+    | '/invest'
+    | '/journey'
+    | '/learn'
+    | '/planner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compare' | '/explore' | '/journey' | '/learn' | '/planner'
+  to:
+    | '/'
+    | '/compare'
+    | '/explore'
+    | '/invest'
+    | '/journey'
+    | '/learn'
+    | '/planner'
   id:
     | '__root__'
     | '/'
     | '/compare'
     | '/explore'
+    | '/invest'
     | '/journey'
     | '/learn'
     | '/planner'
@@ -91,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
   ExploreRoute: typeof ExploreRoute
+  InvestRoute: typeof InvestRoute
   JourneyRoute: typeof JourneyRoute
   LearnRoute: typeof LearnRoute
   PlannerRoute: typeof PlannerRoute
@@ -117,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invest': {
+      id: '/invest'
+      path: '/invest'
+      fullPath: '/invest'
+      preLoaderRoute: typeof InvestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journey': {
@@ -147,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
   ExploreRoute: ExploreRoute,
+  InvestRoute: InvestRoute,
   JourneyRoute: JourneyRoute,
   LearnRoute: LearnRoute,
   PlannerRoute: PlannerRoute,
