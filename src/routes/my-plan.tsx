@@ -44,7 +44,7 @@ function MyPlan() {
 
     <section className="today-card">
       <h2>Progress over time</h2>
-      <svg viewBox={`0 0 ${W} ${H}`} className="today-chart" role="img" aria-label="Line chart of value versus money put in">
+      <svg viewBox={`0 0 ${W} ${H}`} className="today-chart" preserveAspectRatio="none" role="img" aria-label="Line chart of value versus money put in">
         <polyline points={history.map((h, i) => pt(h.invested, i)).join(' ')} className="line-invested" />
         <polyline points={history.map((h, i) => pt(h.value, i)).join(' ')} className="line-value" />
       </svg>
