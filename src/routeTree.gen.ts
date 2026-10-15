@@ -15,6 +15,7 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as InvestRouteImport } from './routes/invest'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as LearnRouteImport } from './routes/learn'
+import { Route as MyPlanRouteImport } from './routes/my-plan'
 import { Route as PlannerRouteImport } from './routes/planner'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const LearnRoute = LearnRouteImport.update({
   path: '/learn',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyPlanRoute = MyPlanRouteImport.update({
+  id: '/my-plan',
+  path: '/my-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlannerRoute = PlannerRouteImport.update({
   id: '/planner',
   path: '/planner',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/invest': typeof InvestRoute
   '/journey': typeof JourneyRoute
   '/learn': typeof LearnRoute
+  '/my-plan': typeof MyPlanRoute
   '/planner': typeof PlannerRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/invest': typeof InvestRoute
   '/journey': typeof JourneyRoute
   '/learn': typeof LearnRoute
+  '/my-plan': typeof MyPlanRoute
   '/planner': typeof PlannerRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/invest': typeof InvestRoute
   '/journey': typeof JourneyRoute
   '/learn': typeof LearnRoute
+  '/my-plan': typeof MyPlanRoute
   '/planner': typeof PlannerRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/invest'
     | '/journey'
     | '/learn'
+    | '/my-plan'
     | '/planner'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/invest'
     | '/journey'
     | '/learn'
+    | '/my-plan'
     | '/planner'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/invest'
     | '/journey'
     | '/learn'
+    | '/my-plan'
     | '/planner'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   InvestRoute: typeof InvestRoute
   JourneyRoute: typeof JourneyRoute
   LearnRoute: typeof LearnRoute
+  MyPlanRoute: typeof MyPlanRoute
   PlannerRoute: typeof PlannerRoute
 }
 
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-plan': {
+      id: '/my-plan'
+      path: '/my-plan'
+      fullPath: '/my-plan'
+      preLoaderRoute: typeof MyPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planner': {
       id: '/planner'
       path: '/planner'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   InvestRoute: InvestRoute,
   JourneyRoute: JourneyRoute,
   LearnRoute: LearnRoute,
+  MyPlanRoute: MyPlanRoute,
   PlannerRoute: PlannerRoute,
 }
 export const routeTree = rootRouteImport
