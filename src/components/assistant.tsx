@@ -58,10 +58,11 @@ const ANSWERS: { keys: string[]; text: string; link?: { to: string; label: strin
   },
 ];
 
-const FALLBACK =
-  "I'm a simple demo helper, so I know the basics covered on this site: SIPs, index funds, FDs, gold, emergency funds, risk, and investing apps. Try one of the suggested questions, or explore the Learn page.";
+const FALLBACK: { text: string; link?: { to: string; label: string } } = {
+  text: "I'm a simple demo helper, so I know the basics covered on this site: SIPs, index funds, FDs, gold, emergency funds, risk, and investing apps. Try one of the suggested questions, or explore the Learn page.",
+};
 
-function answerFor(input: string) {
+function answerFor(input: string): { text: string; link?: { to: string; label: string } } {
   const q = input.toLowerCase();
   return ANSWERS.find((a) => a.keys.some((k) => q.includes(k))) ?? { text: FALLBACK };
 }
