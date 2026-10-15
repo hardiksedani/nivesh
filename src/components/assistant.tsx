@@ -99,7 +99,10 @@ export function Assistant() {
     setTyping(true);
     const reply = answerFor(clean);
     timerRef.current = setTimeout(() => {
-      setMessages((m) => [...m, { role: 'assistant', text: reply.text, link: reply.link }]);
+      const msg: Msg = reply.link
+        ? { role: 'assistant', text: reply.text, link: reply.link }
+        : { role: 'assistant', text: reply.text };
+      setMessages((m) => [...m, msg]);
       setTyping(false);
       inputRef.current?.focus();
     }, 700);
