@@ -12,5 +12,5 @@ describe('Age timeline rules',()=>{
  it('steps up contributions once a year',()=>expect(stepUpValue(1000,10,0,24).contributed).toBeCloseTo(12000+13200,6));
  it('at 0% return, value equals contributions',()=>{const s=stepUpValue(1000,10,0,36);expect(s.value).toBeCloseTo(s.contributed,6)});
  it('only shows ages after the current age',()=>expect(ageTimeline(19,1000,0,0).map(t=>t.age)).toEqual([22,25,30,35,40,50,60]));
- it('age 25 from 19 at ₹1,000, 0%, no step-up is ₹72,000',()=>expect(ageTimeline(19,1000,0,0)[1].value).toBe(72000));
+ it('age 25 from 19 at ₹1,000, 0%, no step-up is ₹72,000',()=>expect(ageTimeline(19,1000,0,0)[1]?.value).toBe(72000));
 });
