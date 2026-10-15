@@ -6,9 +6,9 @@ describe('my plan today', () => {
     expect(defaultHoldings.reduce((a, h) => a + h.monthly, 0)).toBe(8000);
   });
   it('money put in after 12 months is ₹96,000', () => {
-    expect(simulateHoldings(defaultHoldings, 12).history[11].invested).toBe(96000);
+    expect(simulateHoldings(defaultHoldings, 12).history[11]!.invested).toBe(96000);
   });
   it('simulation is identical on every run', () => {
-    expect(simulateHoldings(defaultHoldings, 24).history[23].value).toBe(simulateHoldings(defaultHoldings, 24).history[23].value);
+    expect(simulateHoldings(defaultHoldings, 24).history[23]!.value).toBe(simulateHoldings(defaultHoldings, 24).history[23]!.value);
   });
 });

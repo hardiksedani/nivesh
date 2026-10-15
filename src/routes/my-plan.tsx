@@ -15,7 +15,7 @@ const W = 640, H = 220;
 function MyPlan() {
   const [months, setMonths] = useState(18);
   const { history, holdings } = useMemo(() => simulateHoldings(defaultHoldings, months), [months]);
-  const last = history[history.length - 1];
+  const last = history[history.length - 1] ?? { month: 0, invested: 0, value: 0 };
   const gain = last.value - last.invested;
   const monthly = defaultHoldings.reduce((a, h) => a + h.monthly, 0);
   const left = monthsToGoal(monthly, 0.095, GOAL, last.value);

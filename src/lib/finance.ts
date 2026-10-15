@@ -40,10 +40,10 @@ export function simulateHoldings(holdings: Holding[], months: number, seed = 7) 
   for (let m = 1; m <= months; m++) {
     holdings.forEach((h, i) => {
       const r = Math.pow(1 + h.annualRate, 1 / 12) - 1 + rand() * 2 * h.volatility;
-      values[i] = values[i] * (1 + r) + h.monthly;
+      values[i] = (values[i] ?? 0) * (1 + r) + h.monthly;
     });
     invested += holdings.reduce((a, h) => a + h.monthly, 0);
     history.push({ month: m, invested, value: values.reduce((a, v) => a + v, 0) });
   }
-  return { history, holdings: holdings.map((h, i) => ({ ...h, invested: h.monthly * months, value: values[i] })) };
+  return { history, holdings: holdings.map((h, i) => ({ ...h, invested: h.monthly * months, value: values[i] ?? 0 })) };
 }
